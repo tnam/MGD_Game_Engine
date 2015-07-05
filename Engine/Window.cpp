@@ -1,11 +1,14 @@
 #include <iostream>
 #include "Window.h"
+#include "Keyboard.h"
 
 Window::Window(const char *title, int width, int height)
 	: m_Title(title)
 	, m_Width(width)
 	, m_Height(height)
 {
+	//glfwSetWindowUserPointer(m_Window, m_pKeyboard);
+	//glfwSetKeyCallback(m_Window, key_callback);
 }
 
 Window::~Window()
@@ -54,6 +57,8 @@ void Window::Init()
 	}
 
 	glViewport(0, 0, m_Width, m_Height);
+
+	glfwSetKeyCallback(m_Window, KeyCallback);
 }
 
 void Window::Terminate()
@@ -61,3 +66,10 @@ void Window::Terminate()
 	glfwDestroyWindow(m_Window);
 	glfwTerminate();
 }
+
+void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	//Keyboard *pKeyboard = static_cast<Keyboard*>(glfwGetWindowUserPointer(window));
+	Keyboard::GetInstance().SetKey(key, action != GLFW_RELEASE);
+}
+

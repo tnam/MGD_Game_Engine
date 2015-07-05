@@ -1,9 +1,8 @@
 #pragma once
 
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <GLFW\glfw3.h>
+
 
 class Window
 {
@@ -20,5 +19,8 @@ private:
 	GLFWwindow *m_Window;
 	int m_Width, m_Height;
 	const char *m_Title;
+
+	// Callbacks
+	static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 

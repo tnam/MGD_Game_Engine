@@ -1,8 +1,10 @@
+#include <iostream>
 #include "Game.h"
+#include "Keyboard.h"
 
 Game::Game() 
 {
-	m_Window = new Window("Test", 800, 600);
+	m_Window = new Window("Game Engine", 800, 600);
 }
 
 Game::~Game()
@@ -22,6 +24,11 @@ void Game::GameLoop()
 	while (!m_Window->IsClosed())
 	{
 		m_Window->Update();
+
+		if (Keyboard::GetInstance().IsKeyPressed(GLFW_KEY_A))
+		{
+			std::cout << "key pressed" << std::endl;
+		}
 	}
 
 	Quit();
