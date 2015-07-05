@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Window.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 Window::Window(const char *title, int width, int height)
 	: m_Title(title)
@@ -59,6 +60,7 @@ void Window::Init()
 	glViewport(0, 0, m_Width, m_Height);
 
 	glfwSetKeyCallback(m_Window, KeyCallback);
+	glfwSetMouseButtonCallback(m_Window, MouseButtonCallback);
 }
 
 void Window::Terminate()
@@ -73,3 +75,8 @@ void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, 
 	Keyboard::GetInstance().SetKey(key, action != GLFW_RELEASE);
 }
 
+
+void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+{
+	Mouse::GetInstance().SetButton(button, action != GLFW_RELEASE);
+}

@@ -28,6 +28,9 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>src\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -40,6 +43,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Keyboard.h">
+      <Filter>src\input</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
       <Filter>src\input</Filter>
     </ClInclude>
   </ItemGroup>

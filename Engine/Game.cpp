@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 Game::Game() 
 {
@@ -28,6 +29,11 @@ void Game::GameLoop()
 		if (Keyboard::GetInstance().IsKeyPressed(GLFW_KEY_A))
 		{
 			std::cout << "key pressed" << std::endl;
+		}
+
+		if (Mouse::GetInstance().IsButtonPressed(GLFW_MOUSE_BUTTON_LEFT))
+		{
+			std::cout << "mouse button pressed" << std::endl;
 		}
 	}
 
