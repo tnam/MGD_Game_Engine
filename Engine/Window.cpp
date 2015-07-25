@@ -8,8 +8,6 @@ Window::Window(const char *title, int width, int height)
 	, m_Width(width)
 	, m_Height(height)
 {
-	//glfwSetWindowUserPointer(m_Window, m_pKeyboard);
-	//glfwSetKeyCallback(m_Window, key_callback);
 }
 
 Window::~Window()
@@ -26,8 +24,8 @@ void Window::Update()
 {
 		glfwPollEvents();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 		glfwSwapBuffers(m_Window);
+		glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Window::Init()
@@ -59,6 +57,7 @@ void Window::Init()
 
 	glViewport(0, 0, m_Width, m_Height);
 
+	// Set callbacks
 	glfwSetKeyCallback(m_Window, KeyCallback);
 	glfwSetMouseButtonCallback(m_Window, MouseButtonCallback);
 }
@@ -74,7 +73,6 @@ void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, 
 	//Keyboard *pKeyboard = static_cast<Keyboard*>(glfwGetWindowUserPointer(window));
 	Keyboard::GetInstance().SetKey(key, action != GLFW_RELEASE);
 }
-
 
 void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {

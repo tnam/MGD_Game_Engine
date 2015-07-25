@@ -11,6 +11,12 @@
     <Filter Include="src\rendering">
       <UniqueIdentifier>{43f662de-3409-4dd6-b02d-9584a52b04a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{50a4ba98-92f5-4c0f-85c6-351335c2c1e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shaders">
+      <UniqueIdentifier>{a57d9768-5136-4478-8eb1-7cf5e8bcf426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -31,6 +37,12 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>src\input</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>src\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -48,5 +60,15 @@
     <ClInclude Include="Mouse.h">
       <Filter>src\input</Filter>
     </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>src\rendering</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic.frag" />
+    <None Include="shaders\basic.vs" />
   </ItemGroup>
 </Project>
