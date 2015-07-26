@@ -12,6 +12,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 
 Shader::~Shader()
 {
+	glDeleteProgram(m_ProgramID);
 }
 
 GLint Shader::Load()

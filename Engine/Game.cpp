@@ -18,11 +18,11 @@ Game::~Game()
 void Game::Run()
 {
 	m_Window->Init();
-	GameLoop();
+	Update();
 	Quit();
 }
 
-void Game::GameLoop()
+void Game::Update()
 {
 	Shader shader("shaders/basic.vs", "shaders/basic.frag");
 
@@ -51,15 +51,7 @@ void Game::GameLoop()
 	{
 		m_Window->Update();
 
-		if (Keyboard::GetInstance().IsKeyPressed(GLFW_KEY_A))
-		{
-			std::cout << "key pressed" << std::endl;
-		}
-
-		if (Mouse::GetInstance().IsButtonPressed(GLFW_MOUSE_BUTTON_LEFT))
-		{
-			std::cout << "mouse button pressed" << std::endl;
-		}
+		ProcessInput();
 
 		shader.Use();
 		glBindVertexArray(vao);
@@ -68,6 +60,19 @@ void Game::GameLoop()
 	}
 
 	Quit();
+}
+
+void Game::ProcessInput()
+{
+	if (Keyboard::GetInstance().IsKeyPressed(GLFW_KEY_A))
+	{
+		std::cout << "key pressed" << std::endl;
+	}
+
+	if (Mouse::GetInstance().IsButtonPressed(GLFW_MOUSE_BUTTON_LEFT))
+	{
+		std::cout << "mouse button pressed" << std::endl;
+	}
 }
 
 void Game::Quit()

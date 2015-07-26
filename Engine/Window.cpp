@@ -40,6 +40,7 @@ void Window::Init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
+	// Create window
 	m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, nullptr, nullptr);
 	glfwMakeContextCurrent(m_Window);
 	if (m_Window == nullptr)
@@ -48,6 +49,11 @@ void Window::Init()
 		Terminate();
 	}
 
+	// Center window
+	const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	glfwSetWindowPos(m_Window, (vidmode->width - m_Width) / 2, (vidmode->height - m_Height) / 2);
+
+	// Initialize glew
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{

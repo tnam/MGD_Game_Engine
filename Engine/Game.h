@@ -12,7 +12,8 @@ public:
 
 private:
 	void Quit();
-	void GameLoop();
+	void Update();
+	void ProcessInput();
 	
 private:
 	Window *m_Window;
