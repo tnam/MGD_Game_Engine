@@ -7,7 +7,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	: m_VertexPath(vertexPath)
 	, m_FragmentPath(fragmentPath)
 {
-	m_ProgramID = Load();
+	m_ProgramID = LoadProgram();
 }
 
 Shader::~Shader()
@@ -15,7 +15,7 @@ Shader::~Shader()
 	glDeleteProgram(m_ProgramID);
 }
 
-GLint Shader::Load()
+GLuint Shader::LoadProgram()
 {
 	// Loading vertex and fragment source code 
 	std::string vertexPath = Utility::ReadFile(m_VertexPath).c_str();
@@ -56,7 +56,7 @@ GLint Shader::Load()
 	}
 
 	// Shader Program
-	GLint program = glCreateProgram();
+	GLuint program = glCreateProgram();
 	glAttachShader(program, vertex);
 	glAttachShader(program, fragment);
 	glLinkProgram(program);
@@ -77,12 +77,12 @@ GLint Shader::Load()
 	return program;
 }
 
-void Shader::Use()
+void Shader::Bind()
 {
 	glUseProgram(m_ProgramID);
 }
 
-void Shader::Disable()
+void Shader::Unbind()
 {
 	glUseProgram(0);
 }

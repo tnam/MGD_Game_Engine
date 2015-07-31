@@ -20,4 +20,3 @@ private:
 	static const int MAX_BUTTONS = 32;
 	bool m_Keys[MAX_BUTTONS];
 };
-

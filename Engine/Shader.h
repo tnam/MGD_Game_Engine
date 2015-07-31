@@ -8,11 +8,11 @@ public:
 	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
 	~Shader();
 
-	void Use();
-	void Disable();
+	void Bind();
+	void Unbind();
 
 private:
-	GLint Load();
+	GLuint LoadProgram();
 
 private:
 	GLuint m_ProgramID;
