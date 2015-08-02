@@ -15,6 +15,9 @@ public:
 	void Update();
 	bool IsClosed();
 
+	inline int GetWidth() { return m_Width; }
+	inline int GetHeight() { return m_Height; }
+
 private:
 	GLFWwindow *m_Window;
 	int m_Width, m_Height;

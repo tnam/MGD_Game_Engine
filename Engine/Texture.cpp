@@ -9,11 +9,6 @@ Texture::Texture(const std::string& filename)
 	m_ID = Load();
 }
 
-Texture::~Texture()
-{
-	
-}
-
 GLuint Texture::Load()
 {
 	unsigned char* image = Utility::LoadTexture(m_Filename.c_str(), &m_Width, &m_Height);

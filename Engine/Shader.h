@@ -11,6 +11,8 @@ public:
 	void Bind();
 	void Unbind();
 
+	GLuint GetProgramID() { return m_ProgramID; }
+
 private:
 	GLuint LoadProgram();
 
