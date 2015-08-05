@@ -12,18 +12,18 @@
 #include "Utility.h"
 
 Game::Game() 
+	: m_Camera(glm::vec3(0.0f, 0.0f, 3.0f))
+	, m_Window("Game Engine", 800, 600)
 {
-	m_Window = new Window("Game Engine", 800, 600);
 }
 
 Game::~Game()
 {
-	delete m_Window;
 }
 
 void Game::Run()
 {
-	m_Window->Init();
+	m_Window.Init();
 	Update();
 	Quit();
 }
@@ -31,31 +31,6 @@ void Game::Run()
 void Game::Update()
 {
 	Shader shader("shaders/texture.vs", "shaders/texture.frag");
-
-#if 0
-	GLfloat vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-	     0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
-	};
-
-	GLuint vbo, vao;
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vbo);
-
-	glBindVertexArray(vao);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-#endif
-
-	// Set up vertex data (and buffer(s)) and attribute pointers
 
 	 GLfloat vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -134,9 +109,9 @@ void Game::Update()
 
 	Texture texture("textures/texture1.jpg");
 
-	while (!m_Window->IsClosed())
+	while (!m_Window.IsClosed())
 	{
-		m_Window->Update();
+		m_Window.Update();
 
 		ProcessInput();
 		
@@ -148,9 +123,8 @@ void Game::Update()
         glm::mat4 view;
         glm::mat4 projection;
         model = glm::rotate(model, (GLfloat)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        // Note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-        projection = glm::perspective(glm::radians(45.0f), (GLfloat)m_Window->GetWidth() / (GLfloat)m_Window->GetHeight(), 0.1f, 100.0f);
+        view = m_Camera.GetViewMatrix();
+        projection = glm::perspective(glm::radians(m_Camera.GetFOV()), (GLfloat)m_Window.GetWidth() / (GLfloat)m_Window.GetHeight(), m_Camera.GetNear(), m_Camera.GetFar());
         // Get their uniform location
 		GLint modelLoc = glGetUniformLocation(shader.GetProgramID(), "model");
         GLint viewLoc = glGetUniformLocation(shader.GetProgramID(), "view");
@@ -173,11 +147,6 @@ void Game::Update()
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 		glBindVertexArray(0);
-#if 0
-		glBindVertexArray(vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glBindVertexArray(0);
-#endif
 	}
 
 	Quit();
@@ -198,5 +167,5 @@ void Game::ProcessInput()
 
 void Game::Quit()
 {
-	m_Window->Terminate();
+	m_Window.Terminate();
 }

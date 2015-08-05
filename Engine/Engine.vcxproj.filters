@@ -46,6 +46,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>src\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -72,6 +75,7 @@
     <ClInclude Include="Texture.h">
       <Filter>src\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vs">
