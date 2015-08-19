@@ -3,7 +3,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-
 class Window
 {
 public:
@@ -15,8 +14,8 @@ public:
 	void Update();
 	bool IsClosed();
 
-	inline int GetWidth() { return m_Width; }
-	inline int GetHeight() { return m_Height; }
+	inline int GetWidth() const { return m_Width; }
+	inline int GetHeight() const { return m_Height; }
 
 private:
 	GLFWwindow *m_Window;

@@ -20,7 +20,10 @@ public:
 	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices = {}, std::vector<Texture> textures = {});
 	~Mesh();
 
-	inline GLsizei GetNumIndices() const { return m_NumIndices; }
+	void Enable();
+	void Disable();
+
+	inline GLsizei GetNumIndices() const { return m_Indices.size(); }
 	inline GLuint GetVAO() const { return m_VAO; }
 
 private:
@@ -32,11 +35,4 @@ private:
 	std::vector<Vertex> m_Vertices;
 	std::vector<GLuint> m_Indices;
 	std::vector<Texture> m_Textures;
-	
-	GLsizei m_NumVertices;
-	GLsizei m_NumIndices;
-	GLsizei m_numVertexPositionElements;
-
-	GLsizei m_NumColorElements;
-	GLsizei m_VertexStride;
 };

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Game.h"
+#include "Application.h"
 
 #if defined(DEBUG) || defined(_DEBUG)
 #define _CRTDBG_MAP_ALLOC
@@ -15,7 +15,7 @@ int main()
 		//_CrtSetBreakAlloc(234);
 	#endif
 
-	Game game;
+	Application game;
 	game.Run();
 
 	return 0;

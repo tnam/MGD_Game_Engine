@@ -48,3 +48,13 @@ void Mesh::Init()
 
 	glBindVertexArray(0);
 }
+
+void Mesh::Enable()
+{
+	glBindVertexArray(m_VAO);
+}
+
+void Mesh::Disable()
+{
+	glBindVertexArray(0);
+}

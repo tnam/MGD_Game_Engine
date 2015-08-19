@@ -86,3 +86,9 @@ void Shader::Unbind()
 {
 	glUseProgram(0);
 }
+
+void Shader::SetUniform(const GLchar* name, const glm::mat4& matrix)
+{
+	// TODO: Cache glGetUniformLocation's return value
+	glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, name), 1, GL_FALSE, glm::value_ptr(matrix));
+}

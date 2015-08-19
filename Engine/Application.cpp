@@ -104,20 +104,18 @@ void Application::Update()
 		ProcessInput();
 		
 		texture.Bind();
+
 		shader.Bind();
 
 		// Create transformations
         glm::mat4 view = m_Camera.GetViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(m_Camera.GetFOV()), (GLfloat)m_Window.GetWidth() / (GLfloat)m_Window.GetHeight(), m_Camera.GetNear(), m_Camera.GetFar());
-        // Get their uniform location
-		GLint modelLoc = glGetUniformLocation(shader.GetProgramID(), "model");
-        GLint viewLoc = glGetUniformLocation(shader.GetProgramID(), "view");
-        GLint projLoc = glGetUniformLocation(shader.GetProgramID(), "projection");
-        // Pass them to the shaders
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-		glBindVertexArray(mesh.GetVAO());
+		// Send matrices to the shader
+		shader.SetUniform("view", view);
+		shader.SetUniform("projection", projection);
+
+		mesh.Enable();
 
 		for (GLuint i = 0; i < 10; i++)
 		{
@@ -125,11 +123,12 @@ void Application::Update()
 			model = glm::translate(model, cubePositions[i]);
 			GLfloat angle = 20.0f * i;
 			model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+			shader.SetUniform("model", model);
 
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-		glBindVertexArray(0);
+
+		mesh.Disable();
 	}
 
 	Quit();
