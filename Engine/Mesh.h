@@ -9,15 +9,15 @@
 #include "Texture.h"
 
 struct Vertex {
-	glm::vec3 m_Position;
-	glm::vec3 m_Normal;
-	glm::vec2 m_TexCoords;
+	glm::vec3 position;
+	glm::vec3 normal;
+	glm::vec2 texCoords;
 };
 
 class Mesh
 {
 public:
-	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices = {}, std::vector<Texture> textures = {});
+	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices = {}, const std::vector<Texture>& textures = {});
 	~Mesh();
 
 	void Enable();
