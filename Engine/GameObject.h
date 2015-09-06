@@ -5,13 +5,12 @@
 #include "Texture.h"
 
 
-class GemObject {
+class GemeObject {
 public:
 	glm::vec3 position;
 	glm::vec3 orientation;
 	Mesh* mesh;
 	Texture* texture;
 	PhysicComponent* physic;
-
 
 };
