@@ -1,6 +1,6 @@
 #include "Mouse.h"
 
-const int Mouse::MAX_BUTTONS;
+//const int Mouse::MAX_BUTTONS;
 
 Mouse::Mouse()
 {

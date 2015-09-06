@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-const int Keyboard::MAX_KEYS;
+//const int Keyboard::MAX_KEYS;
 
 Keyboard::Keyboard()
 {
