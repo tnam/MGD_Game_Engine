@@ -26,7 +26,6 @@ public:
 	inline GLsizei GetNumIndices() const { return m_Indices.size(); }
 	inline GLuint GetVAO() const { return m_VAO; }
 
-private:
 	void Init();
 
 private:

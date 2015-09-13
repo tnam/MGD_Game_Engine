@@ -6,7 +6,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indic
 	m_Indices = indices;
 	m_Textures = textures;
 
-	Init();
+	//Init();
 }
 
 Mesh::~Mesh()
@@ -58,3 +58,4 @@ void Mesh::Disable()
 {
 	glBindVertexArray(0);
 }
+

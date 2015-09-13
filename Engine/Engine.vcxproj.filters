@@ -58,6 +58,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="MeshGenerator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -88,6 +91,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="MeshGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\basic.vs">
