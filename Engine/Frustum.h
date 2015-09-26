@@ -26,7 +26,6 @@ class Frustum
 public:
 	Frustum();
 
-private:
 	void Init(float fov, float ratio, float near, float far);
 	void BuildPlanes(const glm::vec3& position, const glm::vec3& forward, const glm::vec3& right, const glm::vec3& up);
 
@@ -37,9 +36,5 @@ private:
 	float m_NearWidth, m_NearHeight;
 	float m_FarWidth, m_FarHeight;
 	float m_NearDistance, m_FarDistance;
-
-	// Frustum corners
-	glm::vec3 m_NearTopLeft, m_NearBottomLeft, m_NearTopRight, m_NearBottomRight;
-	glm::vec3 m_FarTopLeft, m_FarBottomLeft, m_FarTopRight, m_FarBottomRight;
 };
 

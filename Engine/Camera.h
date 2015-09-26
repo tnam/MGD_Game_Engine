@@ -20,7 +20,8 @@ public:
 		   );
 
 	// Camera getters
-	inline glm::mat4 GetViewMatrix() const { return m_ViewMatrix; }
+	inline const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+	inline const Frustum& GetFrustum() const { return m_Frustum; }
 	inline GLfloat GetNear() const { return m_Near; }
 	inline GLfloat GetFar() const { return m_Far; }
 	inline GLfloat GetFOV() const { return m_FOV; }
@@ -57,5 +58,5 @@ private:
 
 private:
 	static const glm::vec3 UP;
-	static const int SPEED;
+	static const float SPEED;
 };
