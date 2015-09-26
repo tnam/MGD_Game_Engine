@@ -5,16 +5,18 @@
 class Plane
 {
 public:
-	void Set3Points(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c);
+	Plane() : m_Distance(0.f) {}
+
+	//void Set3Points(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c);
 	void BuildPlane(const glm::vec3& point, const glm::vec3& normal);
 
 	inline bool IsInFront(const glm::vec3& point) const
 	{
-		return glm::dot(m_Normal, point) >= m_D;
+		return glm::dot(m_Normal, point) >= m_Distance;
 	}
 
 private:
-	glm::vec3 m_A, m_B, m_C;
+	//glm::vec3 m_A, m_B, m_C;
 	glm::vec3 m_Normal;
 	float m_Distance;
 };
