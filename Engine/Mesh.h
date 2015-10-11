@@ -17,14 +17,16 @@ struct Vertex {
 class Mesh
 {
 public:
-	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices = {}, const std::vector<Texture>& textures = {});
+	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices = {}, GLuint texture = 0);
 	~Mesh();
 
 	void Enable();
 	void Disable();
 
+	inline GLsizei GetNumVertices() const { return m_Vertices.size(); }
 	inline GLsizei GetNumIndices() const { return m_Indices.size(); }
 	inline GLuint GetVAO() const { return m_VAO; }
+	inline const std::vector<Vertex>& GetVertices() const { return m_Vertices; }
 
 	void Init();
 
@@ -33,5 +35,6 @@ private:
 
 	std::vector<Vertex> m_Vertices;
 	std::vector<GLuint> m_Indices;
-	std::vector<Texture> m_Textures;
+	GLuint m_Texture;
+	//std::vector<Texture> m_Textures;
 };

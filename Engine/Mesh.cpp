@@ -1,10 +1,10 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, const std::vector<Texture>& textures)
+Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices, GLuint texture)
 {
 	m_Vertices = vertices;
 	m_Indices = indices;
-	m_Textures = textures;
+	m_Texture = texture;
 
 	//Init();
 }

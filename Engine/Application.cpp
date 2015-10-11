@@ -27,6 +27,7 @@ Application::~Application()
 void Application::Run()
 {
 	m_Window.Init();
+	m_Renderer.Init();
 	Update();
 	Quit();
 }
@@ -38,7 +39,7 @@ void Application::Update()
 	Texture texture("textures/texture1.jpg");
 
 	Mesh mesh = MeshGenerator::CreateCube();
-	mesh.Init();
+	//mesh.Init();
 
 	glm::vec3 cubePositions[] = {
 	  glm::vec3( 0.0f,  0.0f,  0.0f), 
@@ -59,7 +60,7 @@ void Application::Update()
 
 		ProcessInput();
 		
-		texture.Bind();
+		//texture.Bind();
 
 		shader.Bind();
 
@@ -71,6 +72,7 @@ void Application::Update()
 		shader.SetUniform("view", view);
 		shader.SetUniform("projection", projection);
 
+		/*
 		mesh.Enable();
 
 		for (GLuint i = 0; i < 10; i++)
@@ -85,6 +87,15 @@ void Application::Update()
 		}
 
 		mesh.Disable();
+		*/
+
+		m_Renderer.Begin();
+
+		m_Renderer.AddRenderable(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
+
+		m_Renderer.End();
+
+		m_Renderer.Render(shader);
 	}
 
 	Quit();
