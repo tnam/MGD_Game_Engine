@@ -11,19 +11,15 @@ class Shader;
 enum class SortType { NONE = 0, FRONT_TO_BACK, BACK_TO_FRONT, TEXTURE };
 
 struct Batch {
-	Batch(GLuint offset, GLuint numVertices, GLuint texture, const glm::mat4& model) 
+	Batch(GLuint offset, GLuint numVertices, GLuint texture) 
 		: m_Offset(offset)
 		, m_NumVertices(numVertices)
 		, m_Texture(texture) 
-		, m_ModelMatrix(model)
 	{}
 
 	GLuint m_Offset;
 	GLuint m_NumVertices;
 	GLuint m_Texture;
-
-	// Temp
-	glm::mat4 m_ModelMatrix;
 };
 
 class Renderer
@@ -37,11 +33,12 @@ public:
 	void End();
 
 	void AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture);
-	void Render(Shader& shader);
+	void Render();
 
 private:
 	void SortRenderables();
 	void CreateBatch();
+	void ApplyModelMatrix();
 
 	// TODO: Replace with lambda
 	static bool compareTextures(const Renderable* a, const Renderable*b);

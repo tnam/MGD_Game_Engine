@@ -20,6 +20,7 @@ public:
 	void SetModelMatrix(glm::vec3 position, glm::vec3 rotation /*, glm::vec3 scale */);
 	void SetTexture(GLuint texture);
 	void SetMesh(Mesh* mesh);
+	void ApplyModelMatrix();
 
 private:
 	Mesh* m_pMesh;

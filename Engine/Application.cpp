@@ -56,6 +56,8 @@ void Application::Update()
 
 	while (!m_Window.IsClosed())
 	{
+		Mesh mesh2 = MeshGenerator::CreateCube();
+
 		m_Window.Update();
 
 		ProcessInput();
@@ -91,11 +93,17 @@ void Application::Update()
 
 		m_Renderer.Begin();
 
-		m_Renderer.AddRenderable(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
+		//for (GLuint i = 0; i < 10; i++)
+		//{
+		//	m_Renderer.AddRenderable(cubePositions[i], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
+		//}
+
+		m_Renderer.AddRenderable(cubePositions[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
+		m_Renderer.AddRenderable(cubePositions[2], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh2, texture.GetID());
 
 		m_Renderer.End();
 
-		m_Renderer.Render(shader);
+		m_Renderer.Render();
 	}
 
 	Quit();

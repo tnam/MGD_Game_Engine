@@ -38,6 +38,12 @@ void Renderer::Init()
 void Renderer::Begin(SortType sortType)
 {
 	m_SortType = sortType;
+
+	for (int i = 0; i < m_Renderables.size(); ++i)
+	{
+		delete m_Renderables[i];
+	}
+
 	m_Renderables.clear();
 	m_BatchQueue.clear();
 }
@@ -76,7 +82,7 @@ void Renderer::CreateBatch()
 	{
 		int offset = 0;
 		Mesh* pMesh = m_Renderables[0]->GetMesh();
-		m_BatchQueue.emplace_back(offset, pMesh->GetNumVertices(), m_Renderables[0]->GetTexture(), m_Renderables[0]->GetModelMatrix());
+		m_BatchQueue.emplace_back(offset, pMesh->GetNumVertices(), m_Renderables[0]->GetTexture());
 		vertices.insert(vertices.end(), pMesh->GetVertices().begin(), pMesh->GetVertices().end());
 		offset += pMesh->GetNumVertices();
 
@@ -85,7 +91,7 @@ void Renderer::CreateBatch()
 			pMesh = m_Renderables[i]->GetMesh();
 			if (m_Renderables[i]->GetTexture() != m_Renderables[i - 1]->GetTexture())
 			{
-				m_BatchQueue.emplace_back(offset, pMesh->GetNumVertices(), m_Renderables[i]->GetTexture(), m_Renderables[i]->GetModelMatrix());
+				m_BatchQueue.emplace_back(offset, pMesh->GetNumVertices(), m_Renderables[i]->GetTexture());
 			}
 			else
 			{
@@ -103,26 +109,37 @@ void Renderer::CreateBatch()
 	}
 }
 
+void Renderer::ApplyModelMatrix()
+{
+}
+
 void Renderer::AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture)
 {
 	Renderable* renderable = new Renderable;
+
+	// TODO: Add scale
 
 	renderable->SetMesh(mesh);
 	renderable->SetModelMatrix(position, rotation);
 	renderable->SetTexture(texture);
 
+	renderable->ApplyModelMatrix();
+
+	//ApplyModelMatrix();
+
 	m_Renderables.push_back(renderable);
 }
 
-void Renderer::Render(Shader& shader)
+void Renderer::Render()
 {
 	glBindVertexArray(m_VAO);
 
 	for (int i = 0; i < m_BatchQueue.size(); ++i)
 	{
 		glBindTexture(GL_TEXTURE_2D, m_BatchQueue[i].m_Texture);
-		shader.SetUniform("model", m_BatchQueue[i].m_ModelMatrix);
+		//shader.SetUniform("model", m_BatchQueue[i].m_ModelMatrix);
 
+		// TODO: Replace with glDrawElements
 		glDrawArrays(GL_TRIANGLES, m_BatchQueue[i].m_Offset, m_BatchQueue[i].m_NumVertices);
 	}
 }

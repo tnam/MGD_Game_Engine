@@ -19,6 +19,11 @@ Mesh::~Mesh()
 		glDeleteBuffers(1, &m_EBO);
 }
 
+void Mesh::SetVertices(const std::vector<Vertex>& vertices)
+{
+	m_Vertices = vertices;
+}
+
 void Mesh::Init()
 {
 	glGenVertexArrays(1, &m_VAO);

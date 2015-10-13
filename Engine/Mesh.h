@@ -17,7 +17,7 @@ struct Vertex {
 class Mesh
 {
 public:
-	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices = {}, GLuint texture = 0);
+	Mesh(const std::vector<Vertex>& vertices = {}, const std::vector<GLuint>& indices = {}, GLuint texture = 0);
 	~Mesh();
 
 	void Enable();
@@ -27,6 +27,8 @@ public:
 	inline GLsizei GetNumIndices() const { return m_Indices.size(); }
 	inline GLuint GetVAO() const { return m_VAO; }
 	inline const std::vector<Vertex>& GetVertices() const { return m_Vertices; }
+
+	void SetVertices(const std::vector<Vertex>& vertices);
 
 	void Init();
 

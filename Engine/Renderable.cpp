@@ -1,5 +1,6 @@
 #include "Renderable.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "Mesh.h"
 
 
 Renderable::Renderable()
@@ -34,4 +35,17 @@ void Renderable::SetTexture(GLuint texture)
 void Renderable::SetMesh(Mesh* mesh)
 {
 	m_pMesh = mesh;
+}
+
+void Renderable::ApplyModelMatrix()
+{
+	std::vector<Vertex> vertices = m_pMesh->GetVertices();
+
+	for (int i = 0; i < vertices.size(); ++i)
+	{
+		glm::vec4 vertex = m_ModelMatrix * glm::vec4(vertices[i].position, 1.0f);
+		vertices[i].position = glm::vec3(vertex.x, vertex.y, vertex.z);
+	}
+
+	m_pMesh->SetVertices(vertices);
 }
