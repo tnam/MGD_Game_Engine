@@ -53,6 +53,6 @@ void Frustum::BuildPlanes(const glm::vec3& position, const glm::vec3& forward, c
 
 	// Build Right plane
 	aux = glm::normalize((nearCenter + right * m_NearWidth) - position);
-	normal = glm::cross(aux, up);
+	normal = glm::cross(up, aux);
 	m_Planes[static_cast<int>(EPlane::RIGHT)].BuildPlane((nearCenter + right * m_NearWidth), normal);
 }

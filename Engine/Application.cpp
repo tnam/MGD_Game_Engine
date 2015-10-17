@@ -38,9 +38,6 @@ void Application::Update()
 
 	Texture texture("textures/texture1.jpg");
 
-	Mesh mesh = MeshGenerator::CreateCube();
-	//mesh.Init();
-
 	glm::vec3 cubePositions[] = {
 	  glm::vec3( 0.0f,  0.0f,  0.0f), 
 	  glm::vec3( 2.0f,  5.0f, -15.0f), 
@@ -53,17 +50,17 @@ void Application::Update()
 	  glm::vec3( 1.5f,  0.2f, -1.5f), 
 	  glm::vec3(-1.3f,  1.0f, -1.5f)  
 	};
+	
 
 	while (!m_Window.IsClosed())
 	{
+		Mesh mesh = MeshGenerator::CreateCube();
 		Mesh mesh2 = MeshGenerator::CreateCube();
 
 		m_Window.Update();
 
 		ProcessInput();
 		
-		//texture.Bind();
-
 		shader.Bind();
 
 		// Create transformations
@@ -74,32 +71,10 @@ void Application::Update()
 		shader.SetUniform("view", view);
 		shader.SetUniform("projection", projection);
 
-		/*
-		mesh.Enable();
-
-		for (GLuint i = 0; i < 10; i++)
-		{
-			glm::mat4 model;
-			model = glm::translate(model, cubePositions[i]);
-			GLfloat angle = 20.0f * i;
-			model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-			shader.SetUniform("model", model);
-
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
-
-		mesh.Disable();
-		*/
-
 		m_Renderer.Begin();
 
-		//for (GLuint i = 0; i < 10; i++)
-		//{
-		//	m_Renderer.AddRenderable(cubePositions[i], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
-		//}
-
-		m_Renderer.AddRenderable(cubePositions[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh, texture.GetID());
-		m_Renderer.AddRenderable(cubePositions[2], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), &mesh2, texture.GetID());
+		m_Renderer.AddRenderable(cubePositions[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), &mesh, texture.GetID(), m_Camera.GetFrustum());
+		m_Renderer.AddRenderable(cubePositions[2], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), &mesh2, texture.GetID(), m_Camera.GetFrustum());
 
 		m_Renderer.End();
 

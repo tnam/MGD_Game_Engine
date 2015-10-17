@@ -39,7 +39,7 @@ void Renderer::Begin(SortType sortType)
 {
 	m_SortType = sortType;
 
-	for (int i = 0; i < m_Renderables.size(); ++i)
+	for (auto i = 0; i < m_Renderables.size(); ++i)
 	{
 		delete m_Renderables[i];
 	}
@@ -86,7 +86,7 @@ void Renderer::CreateBatch()
 		vertices.insert(vertices.end(), pMesh->GetVertices().begin(), pMesh->GetVertices().end());
 		offset += pMesh->GetNumVertices();
 
-		for (int i = 1; i < m_Renderables.size(); ++i)
+		for (decltype(m_Renderables.size()) i = 1; i < m_Renderables.size(); ++i)
 		{
 			pMesh = m_Renderables[i]->GetMesh();
 			if (m_Renderables[i]->GetTexture() != m_Renderables[i - 1]->GetTexture())
@@ -109,32 +109,58 @@ void Renderer::CreateBatch()
 	}
 }
 
-void Renderer::ApplyModelMatrix()
-{
-}
-
-void Renderer::AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture)
+void Renderer::AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture, const Frustum& frustum)
 {
 	Renderable* renderable = new Renderable;
 
-	// TODO: Add scale
-
 	renderable->SetMesh(mesh);
-	renderable->SetModelMatrix(position, rotation);
+	renderable->SetModelMatrix(position, rotation, scale);
 	renderable->SetTexture(texture);
 
 	renderable->ApplyModelMatrix();
 
-	//ApplyModelMatrix();
+	if (ShouldDraw(renderable, frustum))
+		m_Renderables.push_back(renderable);
+}
 
-	m_Renderables.push_back(renderable);
+bool Renderer::ShouldDraw(const Renderable* renderable, const Frustum& frustum)
+{
+	// Testing all vertices against frustum.
+	// TODO: Implement tests with bounding boxes
+
+	const int NUM_PLANES = 6;
+	bool bShouldDraw = false;
+
+	const Plane(&planes)[NUM_PLANES] = frustum.GetPlanes();
+	std::vector<Vertex> vertices = renderable->GetMesh()->GetVertices();
+
+	for (size_t i = 0; i < vertices.size(); ++i)
+	{
+		unsigned int numPlanesInside = 0;
+		for (size_t j = 0; j < NUM_PLANES; ++j)
+		{
+			if (!planes[j].IsInFront(vertices[i].position))
+			{
+				break;
+			}
+			++numPlanesInside;
+		}
+
+		if (numPlanesInside == 6)
+		{
+			bShouldDraw = true;
+			break;
+		}
+	}
+
+	return bShouldDraw;
 }
 
 void Renderer::Render()
 {
 	glBindVertexArray(m_VAO);
 
-	for (int i = 0; i < m_BatchQueue.size(); ++i)
+	for (decltype(m_BatchQueue.size()) i = 0; i < m_BatchQueue.size(); ++i)
 	{
 		glBindTexture(GL_TEXTURE_2D, m_BatchQueue[i].m_Texture);
 		//shader.SetUniform("model", m_BatchQueue[i].m_ModelMatrix);

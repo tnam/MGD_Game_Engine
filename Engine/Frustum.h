@@ -23,14 +23,18 @@ private:
 
 class Frustum
 {
+private:
+	enum class EPlane {TOP = 0, BOTTOM, LEFT, RIGHT, NEAR, FAR, NUM_PLANES};
+
 public:
 	Frustum();
 
 	void Init(float fov, float ratio, float near, float far);
 	void BuildPlanes(const glm::vec3& position, const glm::vec3& forward, const glm::vec3& right, const glm::vec3& up);
+	inline Plane const (&GetPlanes() const)[static_cast<int>(EPlane::NUM_PLANES)] { return m_Planes; }
+
 
 private:
-	enum class EPlane {TOP = 0, BOTTOM, LEFT, RIGHT, NEAR, FAR, NUM_PLANES};
 	Plane m_Planes[static_cast<int>(EPlane::NUM_PLANES)];
 
 	float m_NearWidth, m_NearHeight;

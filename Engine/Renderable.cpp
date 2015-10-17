@@ -4,7 +4,7 @@
 
 
 Renderable::Renderable()
-	: m_pMesh(nullptr), m_pShader(nullptr)
+	: m_pMesh(nullptr)
 {
 }
 
@@ -13,7 +13,7 @@ Renderable::~Renderable()
 {
 }
 
-void Renderable::SetModelMatrix(glm::vec3 position, glm::vec3 rotation /*, glm::vec3 scale */)
+void Renderable::SetModelMatrix(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
 	glm::mat4 model;
 	model = glm::translate(model, position);
@@ -22,7 +22,9 @@ void Renderable::SetModelMatrix(glm::vec3 position, glm::vec3 rotation /*, glm::
 	model = glm::rotate(model, rotation.x, glm::vec3(1.0f, 0.3f, 0.5f));
 	model = glm::rotate(model, rotation.y, glm::vec3(1.0f, 0.3f, 0.5f));
 
-	// TODO: Add scale and axes
+	model = glm::scale(model, scale);
+
+	// TODO: Replace temp axes
 
 	m_ModelMatrix = model;
 }

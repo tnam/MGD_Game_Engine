@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <vector>
+#include "Frustum.h"
 
 class Renderable;
 class Mesh;
@@ -32,13 +33,14 @@ public:
 	void Begin(SortType sortType = SortType::TEXTURE);
 	void End();
 
-	void AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture);
+	void AddRenderable(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale, Mesh* mesh, GLuint texture, const Frustum& frustum);
 	void Render();
 
 private:
 	void SortRenderables();
 	void CreateBatch();
 	void ApplyModelMatrix();
+	bool ShouldDraw(const Renderable* renderable, const Frustum& frustum);
 
 	// TODO: Replace with lambda
 	static bool compareTextures(const Renderable* a, const Renderable*b);
