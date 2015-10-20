@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)deps\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)deps\include;$(SolutionDir)deps\include\bullet;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -48,6 +48,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -109,6 +111,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BulletCollision\BulletCollision.vcxproj">
+      <Project>{8d95943e-b1c3-488e-9bd5-5b4ec52f8351}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{bb2223fc-d783-422d-80c7-5df788a371a4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LinearMath\LinearMath.vcxproj">
+      <Project>{fff9b1e2-aa56-4a57-963a-9fbfe48531d2}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -51,7 +51,6 @@ void Application::Update()
 	  glm::vec3(-1.3f,  1.0f, -1.5f)  
 	};
 	
-
 	while (!m_Window.IsClosed())
 	{
 		Mesh mesh = MeshGenerator::CreateCube();
