@@ -113,14 +113,14 @@
     <Image Include="textures\container.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BulletCollision\BulletCollision.vcxproj">
-      <Project>{8d95943e-b1c3-488e-9bd5-5b4ec52f8351}</Project>
+    <ProjectReference Include="..\..\..\..\..\..\..\bullet3-2.83.6\build\src\BulletCollision\BulletCollision.vcxproj">
+      <Project>{364b27d3-365f-408d-b32c-438431b6a366}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\BulletDynamics\BulletDynamics.vcxproj">
-      <Project>{bb2223fc-d783-422d-80c7-5df788a371a4}</Project>
+    <ProjectReference Include="..\..\..\..\..\..\..\bullet3-2.83.6\build\src\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{210771e7-6d66-4957-a56d-c1d12ea17940}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\LinearMath\LinearMath.vcxproj">
-      <Project>{fff9b1e2-aa56-4a57-963a-9fbfe48531d2}</Project>
+    <ProjectReference Include="..\..\..\..\..\..\..\bullet3-2.83.6\build\src\LinearMath\LinearMath.vcxproj">
+      <Project>{bd87bc93-0710-44eb-a84e-77d706a382d9}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
